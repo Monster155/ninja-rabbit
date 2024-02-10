@@ -38,6 +38,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BackBackground
+    uniqueID: 2663303917
+    locked: 0
+  - name: ForestBackground
+    uniqueID: 2127740283
+    locked: 0
+  - name: Road
+    uniqueID: 3994146201
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: GrassBackground
+    uniqueID: 3602348675
+    locked: 0
+  - name: Rabbit
+    uniqueID: 4083642789
+    locked: 0
+  - name: GrassForeground
+    uniqueID: 4014202273
     locked: 0
