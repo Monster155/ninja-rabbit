@@ -12,7 +12,7 @@ namespace Game
         [SerializeField] private Animator _animator;
 
         private Coroutine _finishHidingCoroutine;
-        
+
         private void Start()
         {
             _mainCamera.gameObject.SetActive(true);
@@ -26,7 +26,7 @@ namespace Game
                 StopCoroutine(_finishHidingCoroutine);
                 _finishHidingCoroutine = null;
             }
-            
+
             _hideCamera.gameObject.SetActive(true);
             _mainCamera.gameObject.SetActive(false);
             _animator.SetTrigger("Start");
@@ -39,7 +39,7 @@ namespace Game
                 StopCoroutine(_finishHidingCoroutine);
                 _finishHidingCoroutine = null;
             }
-            
+
             _animator.SetTrigger("Finish");
             StartCoroutine(FinishHidingCoroutine());
         }
@@ -47,10 +47,12 @@ namespace Game
         private IEnumerator FinishHidingCoroutine()
         {
             yield return new WaitForSeconds(_animator.GetCurrentAnimatorStateInfo(0).length);
-            
+
             _mainCamera.gameObject.SetActive(true);
             _hideCamera.gameObject.SetActive(false);
         }
+
+#if UNITY_EDITOR
 
         [CustomEditor(typeof(CameraController))]
         class CameraControllerEditor : Editor
@@ -65,5 +67,8 @@ namespace Game
                     ((CameraController)target).FinishHiding();
             }
         }
+
+#endif
+
     }
 }

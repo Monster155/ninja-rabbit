@@ -27,7 +27,7 @@ namespace Rabbit
                 StopCoroutine(_hideCoroutine);
                 _hideCoroutine = null;
             }
-            
+
             _movement.SetCanMove(true);
             _cameraController.FinishHiding();
         }
@@ -48,6 +48,8 @@ namespace Rabbit
             _cameraController.StartHiding();
         }
 
+#if UNITY_EDITOR
+
         [CustomEditor(typeof(RabbitController))]
         class RabbitControllerEditor : Editor
         {
@@ -61,5 +63,8 @@ namespace Rabbit
                     ((RabbitController)target).PlayerInput_OnSpaceButtonDown();
             }
         }
+        
+#endif
+
     }
 }
