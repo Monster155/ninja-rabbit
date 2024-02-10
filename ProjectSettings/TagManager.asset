@@ -41,8 +41,14 @@ TagManager:
   - name: BackBackground
     uniqueID: 2663303917
     locked: 0
+  - name: BackgroundMonsters
+    uniqueID: 3701858997
+    locked: 0
   - name: ForestBackground
     uniqueID: 2127740283
+    locked: 0
+  - name: HiddenMonsters
+    uniqueID: 750097733
     locked: 0
   - name: Road
     uniqueID: 3994146201
