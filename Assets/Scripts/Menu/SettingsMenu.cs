@@ -8,9 +8,13 @@ namespace Menu
 {
     public class SettingsMenu : MonoBehaviour
     {
-        [Header("Volume")]
-        [SerializeField] private Slider _slider;
-        [SerializeField] private AudioMixer _audioMixer;
+        [Header("Music Volume")]
+        [SerializeField] private Slider _sliderMusic;
+        [SerializeField] private AudioMixer _audioMixerMusic;
+        [Space]
+        [Header("Sound Volume")]
+        [SerializeField] private Slider _sliderSound;
+        [SerializeField] private AudioMixer _audioMixerSound;
         [Space]
         [Header("Fullscreen")]
         [SerializeField] private Toggle _fullscreenToggle;
@@ -25,9 +29,13 @@ namespace Menu
 
         private void Start()
         {
-            _slider.onValueChanged.AddListener(Slider_OnValueChanged);
-            _audioMixer.GetFloat("MainVolume", out float power);
-            _slider.SetValueWithoutNotify((power + 80f) / 100f);
+            _sliderMusic.onValueChanged.AddListener(SliderMusic_OnValueChanged);
+            _audioMixerMusic.GetFloat("volume", out float powerMusic);
+            _sliderMusic.SetValueWithoutNotify((powerMusic + 80f) / 100f);
+            
+            _sliderSound.onValueChanged.AddListener(SliderSound_OnValueChanged);
+            _audioMixerSound.GetFloat("volume", out float powerSound);
+            _sliderSound.SetValueWithoutNotify((powerSound + 80f) / 100f);
 
             _fullscreenToggle.onValueChanged.AddListener(FullscreenToggle_OnValueChanged);
             _fullscreenToggle.isOn = Screen.fullScreen;
@@ -55,25 +63,16 @@ namespace Menu
             gameObject.SetActive(false);
         }
 
-        private void Slider_OnValueChanged(float power)
-        {
-            _audioMixer.SetFloat("MainVolume", power * 100 - 80);
-        }
-
-        private void FullscreenToggle_OnValueChanged(bool isEnabled)
-        {
-            Screen.fullScreen = isEnabled;
-        }
-
+        private void SliderMusic_OnValueChanged(float power) => _audioMixerMusic.SetFloat("volume", power * 100 - 80);
+        private void SliderSound_OnValueChanged(float power) => _audioMixerSound.SetFloat("volume", power * 100 - 80);
+        private void FullscreenToggle_OnValueChanged(bool isEnabled) => Screen.fullScreen = isEnabled;
+        
         private void ResolutionsDropdown_OnValueChanged(int resolutionIndex)
         {
             Resolution resolution = _resolutions[resolutionIndex];
             Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
 
-        private void CloseButton_OnClick()
-        {
-            gameObject.SetActive(false);
-        }
+        private void CloseButton_OnClick() => gameObject.SetActive(false);
     }
 }

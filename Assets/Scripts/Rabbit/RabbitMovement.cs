@@ -14,9 +14,12 @@ namespace Rabbit
             if (!_isCanMove)
                 return;
 
-            transform.position += new Vector3(1, 0)
-                                  * (_speed * PlayerInput.Instance.Movement
-                                            * (PlayerInput.Instance.IsSprint ? 2 : 1));
+            float moveDeltaX = _speed * PlayerInput.Instance.Movement
+                                          * (PlayerInput.Instance.IsSprint ? 2 : 1);
+            if (transform.position.x + moveDeltaX < 9.5f)
+                return;
+
+            transform.position += new Vector3(moveDeltaX, 0);
         }
 
         public void SetCanMove(bool isCanMove) => _isCanMove = isCanMove;

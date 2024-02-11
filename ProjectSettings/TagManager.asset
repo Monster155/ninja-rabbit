@@ -65,3 +65,6 @@ TagManager:
   - name: GrassForeground
     uniqueID: 4014202273
     locked: 0
+  - name: ForwardForeground
+    uniqueID: 3094678225
+    locked: 0

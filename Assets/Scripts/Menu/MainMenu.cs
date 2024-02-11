@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,10 +21,31 @@ namespace Menu
             _startButton.onClick.AddListener(StartButton_OnClick);
             _settingsButton.onClick.AddListener(SettingsButton_OnClick);
             _exitButton.onClick.AddListener(ExitButton_OnClick);
+
+            _continuesButton.interactable = PlayerPrefs.GetInt("Progress", 0) != 0;
         }
 
-        private void ContinuesButton_OnClick() { }
-        private void StartButton_OnClick() => SceneManager.LoadScene("GameScene");
+        private IEnumerator LoadSceneCoroutine(string sceneName)
+        {
+            AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+            asyncLoad.allowSceneActivation = false;
+            yield return new WaitForSeconds(1.4f);
+            asyncLoad.allowSceneActivation = true;
+        }
+
+        private void ContinuesButton_OnClick()
+        {
+            switch (PlayerPrefs.GetInt("Progress", 0))
+            {
+                case 1:
+                    StartCoroutine(LoadSceneCoroutine("GameScene"));
+                    break;
+                case 2:
+                    StartCoroutine(LoadSceneCoroutine("GameScene2"));
+                    break;
+            }
+        }
+        private void StartButton_OnClick() => StartCoroutine(LoadSceneCoroutine("GameScene"));
         private void SettingsButton_OnClick() => _settingsMenu.SetActive(true);
         private void ExitButton_OnClick() => Application.Quit();
     }

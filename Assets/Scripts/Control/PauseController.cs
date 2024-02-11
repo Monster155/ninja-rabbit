@@ -7,10 +7,11 @@ namespace Control
     {
         public event Action<bool> PauseStateChanged; 
         
-        public bool IsPaused => _isPauseMenuActive || _isTutorialActive;
+        public bool IsPaused => _isPauseMenuActive || _isTutorialActive || _isRabbitDead;
 
         private bool _isPauseMenuActive;
         private bool _isTutorialActive;
+        private bool _isRabbitDead;
         
         public static PauseController Instance { get; private set; }
         private void Awake()
@@ -30,6 +31,12 @@ namespace Control
         public void SetIsTutorialActive(bool isTutorialActive)
         {
             _isTutorialActive = isTutorialActive;
+            PauseStateChanged?.Invoke(IsPaused);
+        }
+
+        public void SetIsRabbitDeadActive(bool isRabbitDead)
+        {
+            _isRabbitDead = isRabbitDead;
             PauseStateChanged?.Invoke(IsPaused);
         }
     }

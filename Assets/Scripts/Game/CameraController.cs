@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -17,6 +18,22 @@ namespace Game
         {
             _mainCamera.gameObject.SetActive(true);
             _hideCamera.gameObject.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (transform.position.x < 21.2f)
+            {
+                var pos = _mainCamera.transform.localPosition;
+                pos.x = 21.2f - transform.position.x;
+                _mainCamera.transform.localPosition = pos;
+            }
+            else if (transform.position.x > 145f)
+            {
+                var pos = _mainCamera.transform.localPosition;
+                pos.x = 145f - transform.position.x;
+                _mainCamera.transform.localPosition = pos;
+            }
         }
 
         public void StartHiding()

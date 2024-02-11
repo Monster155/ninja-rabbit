@@ -8,7 +8,6 @@ namespace Game.PauseMenu
 {
     public class MainMenu : MonoBehaviour
     {
-        [SerializeField] private Button _closeButton;
         [SerializeField] private Button _continueButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _exitButton;
@@ -24,7 +23,6 @@ namespace Game.PauseMenu
 
         private void OnEnable()
         {
-            _closeButton.onClick.AddListener(CloseButton_OnClick);
             _continueButton.onClick.AddListener(ContinueButton_OnClick);
             _settingsButton.onClick.AddListener(SettingsButton_OnClick);
             _exitButton.onClick.AddListener(ExitButton_OnClick);
@@ -34,7 +32,6 @@ namespace Game.PauseMenu
 
         private void OnDisable()
         {
-            _closeButton.onClick.RemoveListener(CloseButton_OnClick);
             _continueButton.onClick.RemoveListener(ContinueButton_OnClick);
             _settingsButton.onClick.RemoveListener(SettingsButton_OnClick);
             _exitButton.onClick.RemoveListener(ExitButton_OnClick);
@@ -44,7 +41,6 @@ namespace Game.PauseMenu
         
         private void PlayerInput_OnEscButtonClicked() => gameObject.SetActive(true);
 
-        private void CloseButton_OnClick() => gameObject.SetActive(false);
         private void ContinueButton_OnClick() => gameObject.SetActive(false);
         private void SettingsButton_OnClick() => _settingsMenu.SetActive(true);
         private void ExitButton_OnClick() => SceneManager.LoadScene("MenuScene");
