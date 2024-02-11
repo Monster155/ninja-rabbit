@@ -8,14 +8,15 @@ namespace Monsters.AfkMonster
     public class AfkMonster : MonoBehaviour
     {
         [SerializeField] private Transform _playerTransform;
-        [SerializeField] private float _playerXtoStart;
+        [SerializeField] private float _playerXtoStart = 21f;
+        [SerializeField] private float _playerXtoStop = 145f;
         [Space]
         [SerializeField] private Animator _animator;
         [SerializeField] private AnimationClip _preparingClip;
         [SerializeField] private AnimationClip _attackClip;
 
         private Coroutine _activatingCoroutine;
-        
+
         private bool _isStarted = false;
         private bool _isPaused = false;
 
@@ -29,7 +30,8 @@ namespace Monsters.AfkMonster
             if (_isPaused)
                 return;
 
-            if (_playerTransform.position.x < _playerXtoStart)
+            if (_playerTransform.position.x < _playerXtoStart
+                || _playerTransform.position.x > _playerXtoStop)
                 return;
 
             transform.position = _playerTransform.position;

@@ -4,6 +4,7 @@ using Control;
 using Game;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Rabbit
 {
@@ -11,6 +12,8 @@ namespace Rabbit
     {
         [SerializeField] private RabbitMovement _movement;
         [SerializeField] private CameraController _cameraController;
+        [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private Animator _animator;
 
         private Coroutine _hideCoroutine;
 
@@ -18,6 +21,28 @@ namespace Rabbit
         {
             PlayerInput.Instance.OnSpaceButtonUp += PlayerInput_OnSpaceButtonUp;
             PlayerInput.Instance.OnSpaceButtonDown += PlayerInput_OnSpaceButtonDown;
+        }
+
+        private void Update()
+        {
+            if (transform.position.x > 157f)
+                switch (PlayerPrefs.GetInt("Progress", 0))
+                {
+                    case 1:
+                        SceneManager.LoadScene("GameScene2");
+                        break;
+                    case 2:
+                        SceneManager.LoadScene("GameWinScene");
+                        break;
+                }
+
+            if (PlayerInput.Instance.Movement > 0.01f)
+                _renderer.flipX = true;
+            else if (PlayerInput.Instance.Movement < -0.01f)
+                _renderer.flipX = false;
+
+            _animator.SetFloat("Speed", Math.Abs(PlayerInput.Instance.Movement));
+            _animator.speed = PlayerInput.Instance.IsSprint ? 2 : 0.7f;
         }
 
         private void PlayerInput_OnSpaceButtonUp()
@@ -63,7 +88,7 @@ namespace Rabbit
                     ((RabbitController)target).PlayerInput_OnSpaceButtonDown();
             }
         }
-        
+
 #endif
 
     }
