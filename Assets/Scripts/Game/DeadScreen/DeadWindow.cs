@@ -19,6 +19,11 @@ namespace Game.DeadScreen
             gameObject.SetActive(false);
         }
 
+        private void OnDestroy()
+        {
+            EventSystem.OnRabbitKill -= OnRabbitKill;
+        }
+
         private void OnRabbitKill()
         {
             PauseController.Instance.SetIsRabbitDeadActive(true);
@@ -30,7 +35,7 @@ namespace Game.DeadScreen
             gameObject.SetActive(false);
             PauseController.Instance.SetIsRabbitDeadActive(false);
 
-            EventSystem.OnRabbitAlive?.Invoke();
+            // EventSystem.OnRabbitAlive?.Invoke();
             
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }

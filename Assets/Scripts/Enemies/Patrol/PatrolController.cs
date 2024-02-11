@@ -14,6 +14,7 @@ public class PatrolController : MonoBehaviour
     [SerializeField] private float dalno;
     [SerializeField] private float ochendalno;
     [SerializeField] private float speed, TimeToRevert;
+    [SerializeField] private float Norm;
     private const float IDLE_STATE = 0;
     private const float WALK_STATE = 1;
     private const float REVERT_STATE = 2;
@@ -66,7 +67,7 @@ public class PatrolController : MonoBehaviour
         {
             case PATROUL_STATE:
                 Patroulir();
-                if(player.transform.position.x - transform.position.x < blizko & !PlayerInput.Instance.IsHide)   
+                if(Mathf.Abs(player.position.x - transform.position.x) < blizko & !PlayerInput.Instance.IsHide)   
                 {
                     videl = player.position;
                     current_big_state = ATTACK_STATE;
@@ -79,29 +80,29 @@ public class PatrolController : MonoBehaviour
                 }
                 else
                 {
-                    if (player.transform.position.x - transform.position.x < sredne & !PlayerInput.Instance.IsHide)
+                    if (Mathf.Abs(player.position.x - transform.position.x) < sredne & !PlayerInput.Instance.IsHide)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
                     }
-                    else if (player.transform.position.x - transform.position.x < ochendalno & PlayerInput.Instance.IsSprint)
+                    else if (Mathf.Abs(player.position.x - transform.position.x) < ochendalno & PlayerInput.Instance.IsSprint)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
                     }
-                    else if (player.transform.position.x - transform.position.x < blizko & PlayerInput.Instance.IsHide)
+                    else if (Mathf.Abs(player.position.x - transform.position.x) < blizko & PlayerInput.Instance.IsHide)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
@@ -116,36 +117,44 @@ public class PatrolController : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, videl, speed * Time.deltaTime);
                 if(transform.position == videl)
                 {
-                    if (player.transform.position.x - transform.position.x < sredne & !PlayerInput.Instance.IsHide)
+                    if (Mathf.Abs(player.position.x - transform.position.x) < sredne & !PlayerInput.Instance.IsHide)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
                     }
-                    else if (player.transform.position.x - transform.position.x < ochendalno & player.GetComponent<PlayerInput>().IsSprint)
+                    else if (Mathf.Abs(player.position.x - transform.position.x) < ochendalno & player.GetComponent<PlayerInput>().IsSprint)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
                     }
-                    else if (player.transform.position.x - transform.position.x < blizko & PlayerInput.Instance.IsHide)
+                    else if (Mathf.Abs(player.position.x - transform.position.x) < blizko & PlayerInput.Instance.IsHide)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
                         videl = player.position;
-                        if (player.transform.position.x - transform.position.x < ochenblizko)
+                        if (Mathf.Abs(player.position.x - transform.position.x) < ochenblizko)
                         {
                             EventSystem.OnRabbitKill?.Invoke();
                         }
                     }
                     else
                     {
-                        current_big_state = PATROUL_STATE;
+                        if (transform.localScale.x > Norm)
+                        {
+                            transform.localScale = new Vector3(transform.localScale.x - scale_speed * Time.deltaTime, transform.localScale.y - scale_speed * Time.deltaTime, transform.localScale.z - scale_speed * Time.deltaTime);
+                        }
+                        else
+                        {
+                            current_big_state = PATROUL_STATE;
+                        }
+
                     }
                 }
                 break;

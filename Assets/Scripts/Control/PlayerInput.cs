@@ -35,6 +35,9 @@ namespace Control
         {
             if (Input.GetKeyDown(KeyCode.Escape))
                 OnEscButtonClicked?.Invoke();
+
+            Movement = 0;
+            IsSprint = false;
             
             if (!_canControl)
                 return;
