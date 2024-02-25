@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Control;
+using Rabbit;
 using UnityEngine;
 
 namespace Enemies.NewPatrol
@@ -10,7 +11,7 @@ namespace Enemies.NewPatrol
         [SerializeField] private float _speed = 2.0f; // Скорость монстра
         [SerializeField] private Transform _pointA; // Точка A
         [SerializeField] private Transform _pointB; // Точка B
-        [SerializeField] private float _noticeRange = 2.0f; // Расстояние обнаружения
+        [SerializeField] private float _noticeRange = 4.0f; // Расстояние обнаружения
         [SerializeField] private float _attackRange = 1.0f; // Расстояние атаки
         [SerializeField] private Transform _player; // Трансформ игрока
         [SerializeField] private Animator _animator;
@@ -80,6 +81,7 @@ namespace Enemies.NewPatrol
                         EventSystem.OnRabbitKill?.Invoke();
                         yield break;
                     }
+                    _animator.SetTrigger("Idle");
                 }
             }
 

@@ -1,17 +1,26 @@
 using System;
 using System.Collections;
 using Control;
+using Rabbit;
 using UnityEngine;
 
 namespace Enemies.NewPatrol
 {
     public class JumpBot : MonoBehaviour
     {
-        [SerializeField] private Animator _animator;
+        [SerializeField] private GameObject _hidden;
+        [SerializeField] private GameObject _jumped;
         [SerializeField] private float _attackRange = 1.0f; // Расстояние атаки
         [SerializeField] private Transform _player; // Трансформ игрока
+        [SerializeField] private RabbitMovement _rabbitMovement;
 
         private Coroutine _attackCoroutine;
+
+        private void Start()
+        {
+            _hidden.SetActive(true);
+            _jumped.SetActive(false);
+        }
 
         private void Update()
         {
@@ -37,7 +46,9 @@ namespace Enemies.NewPatrol
         private IEnumerator Attack()
         {
             // Анимация атаки
-            _animator.SetTrigger("Attack");
+            _hidden.SetActive(false);
+            _jumped.SetActive(true);
+            _rabbitMovement.SetCanMove(false);
             yield return new WaitForSeconds(1.0f); // Задержка атаки
 
             // Нанесение урона игроку
