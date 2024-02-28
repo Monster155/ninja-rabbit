@@ -406,7 +406,7 @@ Transform:
   m_GameObject: {fileID: 65084845}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 72, y: 0, z: 0}
+  m_LocalPosition: {x: 65.71, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1324,8 +1324,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u041E\u043D\u0430 \u0441\u0431\u0438\u043B\u0430\u0441\u044C \u0441\u043E
-    \u0441\u043B\u0435\u0434\u0430.\n\u0421\u0442\u0430\u0440\u0430\u044F..."
+  m_text: "\u0421\u043E\u0431\u0430\u043A\u0430 \u0432 \u0437\u0430\u0441\u0430\u0434\u0435!
+    \u0411\u0443\u0434\u044C \u0442\u0438\u0448\u0435!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 177c78023e0fc764ba18f178efd0b2f2, type: 2}
   m_sharedMaterial: {fileID: 8154195531106457964, guid: 177c78023e0fc764ba18f178efd0b2f2, type: 2}
@@ -3299,7 +3299,7 @@ Transform:
   m_GameObject: {fileID: 739441140}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 8}
+  m_LocalPosition: {x: 4.3, y: 0, z: 8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8403,7 +8403,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1935638776
 Transform:
   m_ObjectHideFlags: 0
@@ -8413,7 +8413,7 @@ Transform:
   m_GameObject: {fileID: 1935638775}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 114.34, y: 2.2074, z: 0}
+  m_LocalPosition: {x: 86.75, y: 2.2074, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
