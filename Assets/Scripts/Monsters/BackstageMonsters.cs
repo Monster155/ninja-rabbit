@@ -12,6 +12,7 @@ namespace Monsters
         [SerializeField] private float _startRabbitX;
         [Space]
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _audioClip;
 
         private bool _isActive = false;
 
@@ -20,6 +21,10 @@ namespace Monsters
             if (_rabbit.position.x > _startRabbitX)
             {
                 _isActive = true;
+                
+                _audioSource.Stop();
+                _audioSource.loop = true;
+                _audioSource.clip = _audioClip;
                 _audioSource.Play();
             }
         }
