@@ -75,7 +75,8 @@ namespace Enemies.NewPatrol
                     yield return new WaitForSeconds(2.0f);
 
                     distanceToPlayer = Math.Abs(transform.position.x - _player.position.x);
-                    if (distanceToPlayer <= _attackRange)
+                    isPlayerVisible = !PlayerInput.Instance.IsHide;
+                    if (distanceToPlayer <= _attackRange && isPlayerVisible)
                     {
                         // Нанесение урона игроку
                         EventSystem.OnRabbitKill?.Invoke();
