@@ -72,11 +72,23 @@ namespace Enemies.NewPatrol
                     // Анимация атаки
                     _animator.SetTrigger("Attack");
                     _attackAudioSource.Play();
-                    yield return new WaitForSeconds(2.0f);
+                    float timer = 2;
+                    while (timer > 0)
+                    {
+                        timer -= Time.deltaTime;
+                        yield return null;
+
+                        Debug.LogError(PlayerInput.Instance.IsHide);
+                        if (PlayerInput.Instance.IsHide)
+                        {
+                            _noticeCoroutine = null;
+                            _animator.SetTrigger("Idle");
+                            yield break;
+                        }
+                    }
 
                     distanceToPlayer = Math.Abs(transform.position.x - _player.position.x);
-                    isPlayerVisible = !PlayerInput.Instance.IsHide;
-                    if (distanceToPlayer <= _attackRange && isPlayerVisible)
+                    if (distanceToPlayer <= _attackRange)
                     {
                         // Нанесение урона игроку
                         EventSystem.OnRabbitKill?.Invoke();

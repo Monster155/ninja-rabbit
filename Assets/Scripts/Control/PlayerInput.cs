@@ -44,6 +44,7 @@ namespace Control
 
             Movement = Input.GetAxis("Horizontal");
             IsSprint = Input.GetKey(KeyCode.LeftShift);
+            IsHide = Input.GetKey(KeyCode.Space);
             
             if(Input.GetKeyUp(KeyCode.LeftShift))
                 OnShiftButtonUp?.Invoke();
